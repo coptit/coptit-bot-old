@@ -25,11 +25,13 @@ async def on_ready():
 
 # this code is used when send embed message without command
 one_time_message_send = False
+if_message_to_send = False
 
 @tasks.loop(seconds=5)
 async def check_for_message_send():
   global one_time_message_send
-  if one_time_message_send == False:
+  global if_message_to_send
+  if one_time_message_send == False and if_message_to_send == True:
     embed = discord.Embed.from_dict(json.load(response))
     channel = await client.fetch_channel(CHANNEL_ID)
     await channel.send(embed=embed)
