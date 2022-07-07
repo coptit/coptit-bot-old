@@ -1,4 +1,7 @@
-# coptit-bot
+<h1 align="center">coptit-bot</h1>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/82411321/177823799-7c34a3ad-047e-4605-8b2e-5803bdd2561f.png"/>
+</p>
 
 - Discord bot for collage programming club discord server
 
