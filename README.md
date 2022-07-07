@@ -10,7 +10,7 @@
 
 ### Installation
 
-> :warning:  You make have to tweak source code. If you need help contack me @discord (KunalSin9h#2270)
+> :warning:  You make have to tweak source code. If you need help contact me @discord (KunalSin9h#2270)
 
 #### Clone the repository
 ```bash
