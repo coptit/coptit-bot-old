@@ -1,6 +1,17 @@
 <h1 align="center">coptit-bot</h1>
+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/82411321/177823799-7c34a3ad-047e-4605-8b2e-5803bdd2561f.png"/>
+</p>
+
+<p align="center">
+  <strong>Built with Python & py-cord.</strong>
+</p>
+
+<p align="center">
+<img alt="Bot version" src="https://img.shields.io/github/v/release/KunalSin9h/coptit-bot?color=%23FFFF00&include_prereleases">
+<img alt="LICENSE" src="https://img.shields.io/github/license/KunalSin9h/coptit-bot?color=%23FFC0CB">
+<img alt="Contributors" src="https://img.shields.io/github/contributors/KunalSin9h/coptit-bot?color=%2300FF00.">
 </p>
 
 - Discord bot for collage programming club's discord server.
