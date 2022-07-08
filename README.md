@@ -5,7 +5,7 @@
 
 - Discord bot for collage programming club discord server
 
- Used for sending message without command in any channel.
+- Used for sending message without command in any channel.
 
 
 ### Installation
