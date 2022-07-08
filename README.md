@@ -3,10 +3,9 @@
   <img src="https://user-images.githubusercontent.com/82411321/177823799-7c34a3ad-047e-4605-8b2e-5803bdd2561f.png"/>
 </p>
 
-- Discord bot for collage programming club's discord server
+- Discord bot for collage programming club's discord server.
 
 - Used for sending message without command in any channel.
-
 
 ### Installation
 
@@ -41,4 +40,4 @@ In ```.env``` file replace
 
 - Put ```embed``` message in ```embed.json``` file
 
-```leave them empty if not want to send message.```
+> leave them empty if not want to send message.
