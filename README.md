@@ -3,6 +3,7 @@
 <p align="center">
   <img src="https://user-images.githubusercontent.com/82411321/177823799-7c34a3ad-047e-4605-8b2e-5803bdd2561f.png"/>
 </p>
+<p align="center"><strong>Discord bot for collage programming club's discord server.</strong></p>
 <p align="center">
   <strong>Built with Python & py-cord.</strong>
 </p>
@@ -12,7 +13,7 @@
 <img alt="Contributors" src="https://img.shields.io/github/contributors/KunalSin9h/coptit-bot?color=%2300FF00.">
 </p>
 
-- Discord bot for collage programming club's discord server.
+### Features
 
 - Used for sending message without command in any channel.
 ---
@@ -57,7 +58,7 @@ In ```.env``` file replace
 
 - Submit the pull request.
 
-> For changlog convension we follow [keep a changelog
+> For changelog convension we follow [keep a changelog
 .](https://keepachangelog.com/en/1.0.0/)
 
 > For release convension we follow [Semantic Versioning.](https://semver.org/#semantic-versioning-200)
