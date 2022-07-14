@@ -5,7 +5,7 @@
 </p>
 <p align="center"><strong>Discord bot for collage programming club's discord server.</strong></p>
 <p align="center">
-  <strong>Built with Python & py-cord.</strong>
+  Built with Python & py-cord.
 </p>
 <p align="center">
 <img alt="Bot version" src="https://img.shields.io/github/v/release/KunalSin9h/coptit-bot?color=%23FFFF00&include_prereleases">
@@ -15,34 +15,23 @@
 
 ### Features
 
-- Used for sending message without command in any channel.
+- Used for sending messages with/without command in any channel.
+- Give welcome message when new user joins.
 ---
 ### Installation
 
 > :warning:  You make have to tweak source code. If you need help contact me @discord (KunalSin9h#2270)
 
-#### Clone the repository
+#### Clone and Install Requirements
 ```bash
 git clone https://github.com/KunalSin9h/coptit-bot.git
+pip install -U -r requirements.txt
 ```
-
-#### Install requirements.
-
-- on linux
-```bash
-cd scripts
-./install-req-linux.sh
-```
-- on windows
-```bash
-cd scripts
-./install-req-win.bat
-```
-
-In ```.env``` file replace
+In ```.env``` file put
 
 - **BOT_TOKEN**  : with secret bot token.
-- **CHANNEL_ID** : id of channel you want to send message.
+- **MESSAGE_CHANNEL_ID** : id of channel you want to send message.
+- **WELCOME_CHANNEL_ID** : id of the channel you want the bot to send welcome messages.
 ---
 ## Roadmap
 
@@ -54,9 +43,10 @@ In ```.env``` file replace
 ---
 ## Contributing
 - Fork the project, create a branch, modify the file and commit.
-> For commit convension we follow [Conventional Commits.](https://www.conventionalcommits.org/en/v1.0.0/)
-
 - Submit the pull request.
+
+## Convensions
+> For commit convension we follow [Conventional Commits.](https://www.conventionalcommits.org/en/v1.0.0/)
 
 > For changelog convension we follow [keep a changelog
 .](https://keepachangelog.com/en/1.0.0/)

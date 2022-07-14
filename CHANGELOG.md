@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2022-07-14
+## Changed
+- A more convenient way of installing requirements. (issue: [#7](https://github.com/KunalSin9h/coptit-bot/issues/7))
+## Fixed
+- Updated README.md (issue: [#8](https://github.com/KunalSin9h/coptit-bot/issues/8))
+
 ## [1.1.0] - 2022-07-11
 ### Added
 - On joining of a new user it can give a welcome message in a particular channel. (issue: [#5](https://github.com/KunalSin9h/coptit-bot/issues/5))
