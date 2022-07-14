@@ -4,6 +4,7 @@ import dotenv
 import json
 
 from discord.ext import tasks
+from discord.ext import commands
 from keep_alive import keep_alive
 
 """
@@ -35,6 +36,8 @@ async def on_ready():
 
 @client.event
 async def on_member_join(member):
+    role = discord.utils.get(member.guild.roles, name="Role-Name")
+    await member.add_roles(role)
     welcome_msg = "Hey, <@" + str(member.id) + "> welcome to **Server!**, pick your #roles and do write suggestion in #suggestion-box if you have any!"
     channel = await client.fetch_channel(WELCOME_CHANNEL_ID)
     await channel.send(welcome_msg)
@@ -46,7 +49,7 @@ content_msg = content_file.read()
 # embed message
 embed_file = open("./embed.json", "r+")
 
-if_auto_message_sended = False
+if_auto_message_sended = True
 
 # this code is used when send embed message without command
 @tasks.loop(seconds=60)

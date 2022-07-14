@@ -17,6 +17,7 @@
 
 - Used for sending messages with/without command in any channel.
 - Give welcome message when new user joins.
+- Assign role a when new member joins.
 ---
 ### Installation
 
@@ -32,6 +33,7 @@ In ```.env``` file put
 - **BOT_TOKEN**  : with secret bot token.
 - **MESSAGE_CHANNEL_ID** : id of channel you want to send message.
 - **WELCOME_CHANNEL_ID** : id of the channel you want the bot to send welcome messages.
+
 ---
 ## Roadmap
 
