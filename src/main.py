@@ -5,13 +5,6 @@ import json
 
 from discord.ext import tasks
 from discord.ext import commands
-from keep_alive import keep_alive
-
-"""
-keep_alive() is usefull only when bot is diployed in Replit.com
-"""
-# from keep_alive import keep_alive
-# keep_alive() # make bot alive 24/7
 
 dotenv.load_dotenv()
 
