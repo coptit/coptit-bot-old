@@ -1,8 +1,3 @@
----
-title: COPTIT Bot
-date: 2022-07-22 22:00:00
-author: Kunal Singh
----
 <h1 align="center">coptit-bot</h1>
 
 <p align="center">
