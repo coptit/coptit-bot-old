@@ -1,5 +1,6 @@
 ### Checks 
 > [x] for tick.
 
+- [ ] Everything is up to date.
 - [ ] I have created a new branch for this PR.
-- [ ] Preview changes.
+- [ ] I have Preview changes.
