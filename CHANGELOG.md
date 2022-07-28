@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.2.0] - 2022-07-28
 ## Added
-- Can send audit-logs in particular channel.
+- Can send audit-logs in a particular channel. (issue: [#11](https://github.com/KunalSin9h/coptit-bot/issues/11))
 
 ## [1.1.2] - 2022-07-14
 ## Fixed

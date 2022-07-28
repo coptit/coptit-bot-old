@@ -18,7 +18,7 @@
 - Used for sending messages with/without command in any channel.
 - Give welcome message when new user joins.
 - Assign role a when new member joins.
-- Can send audit-logs to particular channel.
+- Can send audit-logs in a particular channel.
 ---
 ### Installation
 
