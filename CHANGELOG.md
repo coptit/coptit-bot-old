@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2022-07-28
+## Added
+- Can send audit-logs in particular channel.
+
 ## [1.1.2] - 2022-07-14
 ## Fixed
 - Assign role on new member join not working. (issue: [#6](https://github.com/KunalSin9h/coptit-bot/issues/6))
@@ -30,7 +34,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Can send normal, embed, normal + embed messages to any channel without command.
 
-[Unreleased]: https://github.com/KunalSin9h/coptit-bot/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/KunalSin9h/coptit-bot/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/KunalSin9h/coptit-bot/compare/v1.1.2...v1.2.0
 [1.1.2]: https://github.com/KunalSin9h/coptit-bot/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/KunalSin9h/coptit-bot/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/KunalSin9h/coptit-bot/compare/v1.0.0...v1.1.0
