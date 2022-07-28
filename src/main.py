@@ -1,17 +1,10 @@
-from dis import disco
-from http.client import CannotSendHeader
 import os
-from sys import audit
-import time
-from unicodedata import category
 import discord
-from distro import major_version
 import dotenv
 import json
 from datetime import datetime
 
 from discord.ext import tasks
-from more_itertools import distinct_permutations
 
 dotenv.load_dotenv()
 
