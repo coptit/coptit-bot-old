@@ -4,7 +4,7 @@ import dotenv
 import json
 from datetime import datetime
 
-from discord.ext import tasks
+from discord.ext import tasks, commands
 
 dotenv.load_dotenv()
 
@@ -16,13 +16,12 @@ remember time stamp should be like this.
 # Enable all Intents
 intents = discord.Intents.all()
 intents.members = True
-client = discord.Client(intents=intents)
+client = commands.Bot(command_prefix="$", intents=intents)
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 MESSAGE_CHANNEL_ID = os.getenv("MESSAGE_CHANNEL_ID")
 WELCOME_CHANNEL_ID = os.getenv("WELCOME_CHANNEL_ID")
 AUDIT_LOG_CHANNEL_ID = os.getenv("AUDIT_LOG_CHANNEL_ID")
-
 
 @client.event
 async def on_ready():
@@ -45,7 +44,7 @@ content_msg = content_file.read()
 embed_file = open("./embed.json", "r+")
 
 if_auto_message_sended = True
-audit_message_to_send = True
+audit_message_to_send = False
 
 # this code is used when send embed message without command
 @tasks.loop(seconds=60)
@@ -74,29 +73,30 @@ async def message_send():
 
         if_auto_message_sended = True
 
-# This code is used when we have to give command and then bot will send embed message
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
-    if message.content.startswith("^send"):
-
-        # if embed.json is not empty then send this message
-        if os.stat("embed.json").st_size != 0:
-            embed = discord.Embed.from_dict(json.load(embed_file))
-            await message.channel.send(content=content_msg, embed=embed)
-
-            # clear both message files
-            content_file.truncate(0)
-            embed_file.truncate(0)
-
-        elif os.stat("content.txt").st_size != 0:
-            await message.channel.send(content=content_msg)
-
-            content_file.truncate(0)
-
-
 message_send.start()
+
+@client.command(name="send")
+@commands.has_role("Coordinator")
+async def send(ctx):
+    # if embed.json is not empty then send this message
+    if os.stat("embed.json").st_size != 0:
+        embed = discord.Embed.from_dict(json.load(embed_file))
+        await ctx.channel.send(content=content_msg, embed=embed)
+
+        # clear both message files
+        content_file.truncate(0)
+        embed_file.truncate(0)
+
+    elif os.stat("content.txt").st_size != 0:
+        await ctx.channel.send(content=content_msg)
+
+        content_file.truncate(0)
+
+@client.command(name="clear")
+@commands.has_role("Coordinator")
+async def clear(ctx, num = 1):
+    num += 1
+    await ctx.channel.purge(limit=num)
 
 """
 Brief: Audit logs on New Channel created
