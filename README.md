@@ -19,6 +19,7 @@
 - Give welcome message when new user joins.
 - Assign role a when new member joins.
 - Can send audit-logs in a particular channel.
+- Do actions using commands.
 ---
 ### Installation
 
