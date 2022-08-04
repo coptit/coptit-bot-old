@@ -36,14 +36,8 @@ async def on_member_join(member):
     channel = await client.fetch_channel(WELCOME_CHANNEL_ID)
     await channel.send(welcome_msg)
 
-# content message(normal message)
-content_file = open("./content.txt", "r+")
-content_msg = content_file.read()
 
-# embed message
-embed_file = open("./embed.json", "r+")
-
-if_auto_message_sended = True
+if_auto_message_sended = False
 audit_message_to_send = False
 
 # this code is used when send embed message without command
@@ -56,20 +50,19 @@ async def message_send():
 
         channel = await client.fetch_channel(MESSAGE_CHANNEL_ID)  # find channel to send message
 
-        # if embed.json is not empty then send this message
         if os.stat("embed.json").st_size != 0:
-            embed = discord.Embed.from_dict(json.load(embed_file))
-            await channel.send(content=content_msg, embed=embed)
+            embed = discord.Embed.from_dict(json.load(open("./embed.json", "r+")))
+            await channel.send(content=open("./content.txt", "r+").read(), embed=embed)
 
             # clear both message files
-            content_file.truncate(0)
-            embed_file.truncate(0)
+            open("./content.txt", "r+").truncate(0)
+            open("./embed.json", "r+").truncate(0)
 
+
+        # if embed.json is not empty then send this message
         elif os.stat("content.txt").st_size != 0:
-            await channel.send(content=content_msg)
-
-            content_file.truncate(0)
-
+            await ctx.channel.send(content=open("./content.txt", "r+").read())
+            open("./content.txt", "r+").truncate(0)
 
         if_auto_message_sended = True
 
@@ -79,18 +72,20 @@ message_send.start()
 @commands.has_role("Coordinator")
 async def send(ctx):
     # if embed.json is not empty then send this message
+    # embed message
+    embed_file = open("./embed.json", "r+")
+
     if os.stat("embed.json").st_size != 0:
-        embed = discord.Embed.from_dict(json.load(embed_file))
-        await ctx.channel.send(content=content_msg, embed=embed)
+        embed = discord.Embed.from_dict(json.load(open("./embed.json", "r+")))
+        await ctx.channel.send(content=open("./content.txt", "r+").read(), embed=embed)
 
         # clear both message files
-        content_file.truncate(0)
-        embed_file.truncate(0)
+        open("./content.txt", "r+").truncate(0)
+        open("./embed.json", "r+").truncate(0)
 
     elif os.stat("content.txt").st_size != 0:
-        await ctx.channel.send(content=content_msg)
-
-        content_file.truncate(0)
+        await ctx.channel.send(content=open("./content.txt", "r+").read())
+        open("./content.txt", "r+").truncate(0)
 
 @client.command(name="clear")
 @commands.has_role("Coordinator")
