@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ## Added
 - Commands support.
+## Fixed
+- $send command was not reading new file content. Now it can read and send while bot is running. (issue : [#24](https://github.com/KunalSin9h/coptit-bot/issues/24))
 
 ## [1.2.0] - 2022-07-28
 ## Added
