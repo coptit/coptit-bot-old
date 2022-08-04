@@ -37,7 +37,7 @@ async def on_member_join(member):
     await channel.send(welcome_msg)
 
 
-if_auto_message_sended = False
+if_auto_message_sended = True
 audit_message_to_send = False
 
 # this code is used when send embed message without command
@@ -86,6 +86,9 @@ async def send(ctx):
     elif os.stat("content.txt").st_size != 0:
         await ctx.channel.send(content=open("./content.txt", "r+").read())
         open("./content.txt", "r+").truncate(0)
+
+    if ctx.message.content == "$send":
+        await ctx.message.delete()
 
 @client.command(name="clear")
 @commands.has_role("Coordinator")
