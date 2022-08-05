@@ -2,6 +2,7 @@ import os
 import discord
 import dotenv
 import json
+import requests
 from datetime import datetime
 
 from discord.ext import tasks, commands
@@ -61,7 +62,7 @@ async def message_send():
 
         # if embed.json is not empty then send this message
         elif os.stat("content.txt").st_size != 0:
-            await ctx.channel.send(content=open("./content.txt", "r+").read())
+            await channel.send(content=open("./content.txt", "r+").read())
             open("./content.txt", "r+").truncate(0)
 
         if_auto_message_sended = True
@@ -95,6 +96,25 @@ async def send(ctx):
 async def clear(ctx, num = 1):
     num += 1
     await ctx.channel.purge(limit=num)
+
+"""
+Get meme from api
+github : https://github.com/D3vd/Meme_Api
+"""
+def get_meme():
+  response= requests.get("https://meme-api.herokuapp.com/gimme")
+  dict = response.json()
+  return dict
+
+@client.command(name="meme")
+async def send_meme(ctx):
+
+    while(True):
+        dict_res = get_meme()
+        if dict_res["nsfw"] == False:
+            await ctx.channel.send(dict_res["preview"][2])
+            break
+
 
 """
 Brief: Audit logs on New Channel created
