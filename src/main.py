@@ -102,18 +102,14 @@ Get meme from api
 github : https://github.com/D3vd/Meme_Api
 """
 def get_meme():
-  response= requests.get("https://meme-api.herokuapp.com/gimme")
+  response= requests.get("https://meme-api.herokuapp.com/gimme/ProgrammerHumor")
   dict = response.json()
   return dict
 
 @client.command(name="meme")
 async def send_meme(ctx):
-
-    while(True):
-        dict_res = get_meme()
-        if dict_res["nsfw"] == False:
-            await ctx.channel.send(dict_res["preview"][2])
-            break
+    dict_res = get_meme()
+    await ctx.channel.send(dict_res["preview"][2])
 
 
 """
