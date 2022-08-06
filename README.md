@@ -30,6 +30,8 @@
 git clone https://github.com/KunalSin9h/coptit-bot.git
 pip install -U -r requirements.txt
 ```
+After installing requirements do `cp .env-template .env`
+
 In ```.env``` file put
 
 - **BOT_TOKEN**  : with secret bot token.
