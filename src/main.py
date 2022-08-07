@@ -52,7 +52,7 @@ async def message_send():
 
     global if_auto_message_sended
 
-    if if_auto_message_sended == False:
+    if if_auto_message_sended is False:
 
         channel = await client.fetch_channel(MESSAGE_CHANNEL_ID
                                              )  # find channel to send message
@@ -222,7 +222,7 @@ async def on_guild_channel_update(channel_before, channel_after):
             any_update = True
 
         if channel_before.topic != channel_after.topic:
-            if channel_before.topic == None:
+            if channel_before.topic is None:
                 embed_x.add_field(name="Topic",
                                   value="None -> " + channel_after.topic)
             else:
@@ -279,9 +279,9 @@ async def on_guild_role_delete(role):
 
         embed_x.add_field(name="Color", value=role.color)
         embed_x.add_field(name="Hoisted",
-                          value="Yes" if role.hoist == True else "No")
+                          value="Yes" if role.hoist is True else "No")
         embed_x.add_field(name="Mentionable",
-                          value="Yes" if role.mentionable == True else "No")
+                          value="Yes" if role.mentionable is True else "No")
 
         embed_x.set_footer(text="Role ID: {0}".format(role.id))
 
