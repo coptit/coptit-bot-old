@@ -36,7 +36,8 @@ async def on_member_join(member):
     await member.add_roles(role)
     welcome_msg = (
         "Hey, <@" + str(member.id) +
-        "> welcome to **Server!**, pick your #roles and do write suggestion in #suggestion-box if you have any!"
+        "> welcome to **Server!**, pick your #roles and do write \
+        suggestion in #suggestion-box if you have any!"
     )
     channel = await client.fetch_channel(WELCOME_CHANNEL_ID)
     await channel.send(welcome_msg)
@@ -49,8 +50,6 @@ audit_message_to_send = False
 # this code is used when send embed message without command
 @tasks.loop(seconds=60)
 async def message_send():
-
-    global if_auto_message_sended
 
     if if_auto_message_sended is False:
 
