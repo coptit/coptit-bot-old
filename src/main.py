@@ -186,8 +186,10 @@ async def on_guild_channel_delete(channel):
         embed_x.set_footer(text="Channel ID: {0}".format(channel.id))
 
         embed_x.add_field(name="Name", value=channel.name)
-        if (channel.type != discord.ChannelType.voice
-                and channel.type != discord.ChannelType.category):
+        if channel.type not in (
+                discord.ChannelType.voice,
+                discord.ChannelType.category,
+        ):
             embed_x.add_field(name="Topic", value=channel.topic)
 
         await audit_ch.send(embed=embed_x)
