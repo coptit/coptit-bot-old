@@ -368,7 +368,7 @@ async def on_guild_update(guild_before, guild_after):
             )
             major_upadate = True
 
-        if not (major_upadate):
+        if not major_upadate:
             embed_x.add_field(name="Other", value="Yes")
 
         await audit_ch.send(embed=embed_x)
