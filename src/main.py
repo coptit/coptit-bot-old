@@ -51,6 +51,8 @@ audit_message_to_send = False
 @tasks.loop(seconds=60)
 async def message_send():
 
+    global if_auto_message_sended
+
     if if_auto_message_sended is False:
 
         channel = await client.fetch_channel(MESSAGE_CHANNEL_ID
