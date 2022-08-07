@@ -13,6 +13,10 @@
 <img alt="Contributors" src="https://img.shields.io/github/contributors/KunalSin9h/coptit-bot?color=%2300FF00.">
 </p>
 
+[![DeepSource](https://deepsource.io/gh/KunalSin9h/coptit-bot.svg/?label=active+issues&show_trend=true&token=8iibhbMTO8x-EisNVUIuySXI)](https://deepsource.io/gh/KunalSin9h/coptit-bot/?ref=repository-badge)
+
+
+
 ### Features
 
 - Used for sending messages with/without command in any channel.
