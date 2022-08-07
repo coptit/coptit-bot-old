@@ -130,7 +130,6 @@ Brief: Audit logs on New Channel created
 
 @client.event
 async def on_guild_channel_create(channel):
-    global audit_message_to_send
 
     if audit_message_to_send:
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
@@ -173,7 +172,6 @@ Audit log on channel deleted
 
 @client.event
 async def on_guild_channel_delete(channel):
-    global audit_message_to_send
 
     if audit_message_to_send:
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
@@ -202,7 +200,6 @@ Audit log on channel update
 
 @client.event
 async def on_guild_channel_update(channel_before, channel_after):
-    global audit_message_to_send
 
     if audit_message_to_send:
         any_update = False
@@ -245,7 +242,6 @@ Audit log on role created
 
 @client.event
 async def on_guild_role_create(role):
-    global audit_message_to_send
 
     if audit_message_to_send:
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
@@ -267,7 +263,6 @@ Audit log on role deleted
 
 @client.event
 async def on_guild_role_delete(role):
-    global audit_message_to_send
 
     if audit_message_to_send:
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
@@ -295,7 +290,6 @@ Audit log on role update
 
 @client.event
 async def on_guild_role_update(role_before, role_after):
-    global audit_message_to_send
 
     if audit_message_to_send:
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
@@ -334,7 +328,6 @@ Audit log for server update
 
 @client.event
 async def on_guild_update(guild_before, guild_after):
-    global audit_message_to_send
 
     if audit_message_to_send:
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
