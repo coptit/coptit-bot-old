@@ -204,7 +204,8 @@ async def on_guild_channel_update(channel_before, channel_after):
         any_update = False
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
-        title_x = f":tools: {str(channel_after.type).capitalize()} channel updated: {channel_before.name}"
+        title_x = f":tools: {str(channel_after.type).capitalize()} \
+        channel updated: {channel_before.name}"
 
         embed_x = discord.Embed(title=title_x,
                                 timestamp=datetime.now(),
