@@ -8,10 +8,6 @@ import requests
 from discord.ext import commands, tasks
 
 dotenv.load_dotenv()
-"""
-remember time stamp should be like this.
-"timestamp": "2021-12-09T11:36:00.000+00:00",
-"""
 
 # Enable all Intents
 intents = discord.Intents.all()
@@ -26,12 +22,18 @@ AUDIT_LOG_CHANNEL_ID = os.getenv("AUDIT_LOG_CHANNEL_ID")
 
 @client.event
 async def on_ready():
+    '''
+    Event happens when bot become live.
+    '''
     # await client.change_presence(activity=discord.Game(name="with code!"))
     print(f"Logged in as {client.user} (ID: {client.user.id})")
 
 
 @client.event
 async def on_member_join(member):
+    '''
+    Event happens when a new member join the server.
+    '''
     role = discord.utils.get(member.guild.roles, name="Role-Name")
     await member.add_roles(role)
     welcome_msg = ("Hey, <@" + str(member.id) +
@@ -42,13 +44,15 @@ async def on_member_join(member):
 
 
 if_auto_message_sended = True
-audit_message_to_send = True
+audit_message_to_send = False
 
 
 # this code is used when send embed message without command
 @tasks.loop(seconds=60)
 async def message_send():
-
+    '''
+    Tasks loop for sending message. 
+    '''
     global if_auto_message_sended
 
     if if_auto_message_sended is False:
@@ -80,6 +84,9 @@ message_send.start()
 @client.command(name="send")
 @commands.has_role("Coordinator")
 async def send(ctx):
+    '''
+    $send command for predefined messages.
+    '''
     # if embed.json is not empty then send this message
     # embed message
 
@@ -103,32 +110,28 @@ async def send(ctx):
 @client.command(name="clear")
 @commands.has_role("Coordinator")
 async def clear(ctx, num=1):
+    '''
+    $clear command for purgeing messages.
+    '''
     num += 1
     await ctx.channel.purge(limit=num)
 
-
-"""
-Get meme from api
-github : https://github.com/D3vd/Meme_Api
-"""
-
-
 @client.command(name="meme")
 async def send_meme(ctx):
+    '''
+    $meme command for sending memes.
+    api github : https://github.com/D3vd/Meme_Api
+    '''
     response = requests.get(
         "https://meme-api.herokuapp.com/gimme/ProgrammerHumor")
     dict_res = response.json()
     await ctx.channel.send(dict_res["preview"][2])
 
-
-"""
-Brief: Audit logs on New Channel created
-"""
-
-
 @client.event
 async def on_guild_channel_create(channel):
-
+    '''
+    Audit log send to channel when a new channel got created.
+    '''
     if audit_message_to_send:
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
@@ -162,15 +165,11 @@ async def on_guild_channel_create(channel):
         embed_x.set_footer(text=f"Channel ID: {channel.id}")
         await audit_ch.send(embed=embed_x)
 
-
-"""
-Audit log on channel deleted
-"""
-
-
 @client.event
 async def on_guild_channel_delete(channel):
-
+    '''
+    Audit log send to channel when a channel got deleted 
+    '''
     if audit_message_to_send:
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
@@ -192,14 +191,11 @@ async def on_guild_channel_delete(channel):
         await audit_ch.send(embed=embed_x)
 
 
-"""
-Audit log on channel update
-"""
-
-
 @client.event
 async def on_guild_channel_update(channel_before, channel_after):
-
+    '''
+    Audit log send to channel on channnel update.
+    '''
     if audit_message_to_send:
         any_update = False
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
@@ -233,15 +229,11 @@ async def on_guild_channel_update(channel_before, channel_after):
         if any_update:
             await audit_ch.send(embed=embed_x)
 
-
-"""
-Audit log on role created
-"""
-
-
 @client.event
 async def on_guild_role_create(role):
-
+    '''
+    Audit log on new role created.
+    '''
     if audit_message_to_send:
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
@@ -255,14 +247,11 @@ async def on_guild_role_create(role):
         await audit_ch.send(embed=embed_x)
 
 
-"""
-Audit log on role deleted
-"""
-
-
 @client.event
 async def on_guild_role_delete(role):
-
+    '''
+    Audit log on role delete
+    '''
     if audit_message_to_send:
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
@@ -281,15 +270,11 @@ async def on_guild_role_delete(role):
 
         await audit_ch.send(embed=embed_x)
 
-
-"""
-Audit log on role update
-"""
-
-
 @client.event
 async def on_guild_role_update(role_before, role_after):
-
+    '''
+    Audit log on role update.
+    '''
     if audit_message_to_send:
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
@@ -319,15 +304,11 @@ async def on_guild_role_update(role_before, role_after):
         if is_updated:
             await audit_ch.send(embed=embed_x)
 
-
-"""
-Audit log for server update
-"""
-
-
 @client.event
 async def on_guild_update(guild_before, guild_after):
-
+    '''
+    Audit log on server update.
+    '''
     if audit_message_to_send:
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
