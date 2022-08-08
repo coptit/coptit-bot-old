@@ -106,6 +106,7 @@ async def clear(ctx, num=1):
     num += 1
     await ctx.channel.purge(limit=num)
 
+
 @client.command(name="meme")
 async def send_meme(ctx):
     """$meme command for sending memes.api github : https://github.com/D3vd/Meme_Api"""
@@ -113,6 +114,7 @@ async def send_meme(ctx):
         "https://meme-api.herokuapp.com/gimme/ProgrammerHumor")
     dict_res = response.json()
     await ctx.channel.send(dict_res["preview"][2])
+
 
 @client.event
 async def on_guild_channel_create(channel):
@@ -149,6 +151,7 @@ async def on_guild_channel_create(channel):
                                 color=0x95F985)
         embed_x.set_footer(text="Channel ID: {0}".format(channel.id))
         await audit_ch.send(embed=embed_x)
+
 
 @client.event
 async def on_guild_channel_delete(channel):
@@ -211,6 +214,7 @@ async def on_guild_channel_update(channel_before, channel_after):
         if any_update:
             await audit_ch.send(embed=embed_x)
 
+
 @client.event
 async def on_guild_role_create(role):
     """Audit log on new role created."""
@@ -248,6 +252,7 @@ async def on_guild_role_delete(role):
 
         await audit_ch.send(embed=embed_x)
 
+
 @client.event
 async def on_guild_role_update(role_before, role_after):
     """Audit log on role update."""
@@ -279,6 +284,7 @@ async def on_guild_role_update(role_before, role_after):
 
         if is_updated:
             await audit_ch.send(embed=embed_x)
+
 
 @client.event
 async def on_guild_update(guild_before, guild_after):
