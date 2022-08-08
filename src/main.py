@@ -18,14 +18,14 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 MESSAGE_CHANNEL_ID = os.getenv("MESSAGE_CHANNEL_ID")
 WELCOME_CHANNEL_ID = os.getenv("WELCOME_CHANNEL_ID")
 AUDIT_LOG_CHANNEL_ID = os.getenv("AUDIT_LOG_CHANNEL_ID")
-
+AUTO_MESSAGE_TO_SEND  = os.getenv("AUTO_MESSAGE_TO_SEND")
+AUDIT_MESSAGE_TO_SEND = os.getenv("AUDIT_MESSAGE_TO_SEND")
 
 @client.event
 async def on_ready():
     """Event happens when bot become live."""
     # await client.change_presence(activity=discord.Game(name="with code!"))
     print(f"Logged in as {client.user} (ID: {client.user.id})")
-
 
 @client.event
 async def on_member_join(member):
@@ -38,17 +38,11 @@ async def on_member_join(member):
     channel = await client.fetch_channel(WELCOME_CHANNEL_ID)
     await channel.send(welcome_msg)
 
-
-if_auto_message_sended = True
-audit_message_to_send = False
-
-
 # this code is used when send embed message without command
 @tasks.loop(seconds=60)
 async def message_send():
     """Tasks loop for sending message."""
-
-    if if_auto_message_sended is False:
+    if AUTO_MESSAGE_TO_SEND is "true":
 
         channel = await client.fetch_channel(MESSAGE_CHANNEL_ID
                                              )  # find channel to send message
@@ -67,12 +61,11 @@ async def message_send():
         elif os.stat("content.txt").st_size != 0:
             await channel.send(content=open("./content.txt", "r+").read())
             open("./content.txt", "r+").truncate(0)
-
-        if_auto_message_sended = True
+        
+        AUTO_MESSAGE_TO_SEND = "false"
 
 
 message_send.start()
-
 
 @client.command(name="send")
 @commands.has_role("Coordinator")
@@ -114,11 +107,10 @@ async def send_meme(ctx):
     dict_res = response.json()
     await ctx.channel.send(dict_res["preview"][2])
 
-
 @client.event
 async def on_guild_channel_create(channel):
     """Audit log send to channel when a new channel got created."""
-    if audit_message_to_send:
+    if AUDIT_MESSAGE_TO_SEND is "true":
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
         if channel.type == discord.ChannelType.text:
@@ -155,7 +147,7 @@ async def on_guild_channel_create(channel):
 @client.event
 async def on_guild_channel_delete(channel):
     """Audit log send to channel when a channel got deleted"""
-    if audit_message_to_send:
+    if AUDIT_MESSAGE_TO_SEND is "true":
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
         title_x = f":wastebasket: {str(channel.type).capitalize()} channel deleted"
@@ -179,7 +171,7 @@ async def on_guild_channel_delete(channel):
 @client.event
 async def on_guild_channel_update(channel_before, channel_after):
     """Audit log send to channel on channnel update."""
-    if audit_message_to_send:
+    if AUDIT_MESSAGE_TO_SEND is "true":
         any_update = False
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
@@ -216,7 +208,7 @@ async def on_guild_channel_update(channel_before, channel_after):
 @client.event
 async def on_guild_role_create(role):
     """Audit log on new role created."""
-    if audit_message_to_send:
+    if AUDIT_MESSAGE_TO_SEND is "true":
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
         title_x = ":screwdriver: Role created: " + role.name
@@ -232,7 +224,7 @@ async def on_guild_role_create(role):
 @client.event
 async def on_guild_role_delete(role):
     """Audit log on role delete"""
-    if audit_message_to_send:
+    if AUDIT_MESSAGE_TO_SEND is "true":
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
         title_x = ":wastebasket: Role deleted: " + role.name
@@ -254,7 +246,7 @@ async def on_guild_role_delete(role):
 @client.event
 async def on_guild_role_update(role_before, role_after):
     """Audit log on role update."""
-    if audit_message_to_send:
+    if AUDIT_MESSAGE_TO_SEND is "true":
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
         title_x = ":hammer_and_wrench: Role updated: " + role_before.name
@@ -287,7 +279,7 @@ async def on_guild_role_update(role_before, role_after):
 @client.event
 async def on_guild_update(guild_before, guild_after):
     """Audit log on server update."""
-    if audit_message_to_send:
+    if AUDIT_MESSAGE_TO_SEND is "true":
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
         title_x = ":hammer_and_wrench: Server information updated!"
