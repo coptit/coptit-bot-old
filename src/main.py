@@ -46,7 +46,7 @@ audit_message_to_send = False
 # this code is used when send embed message without command
 @tasks.loop(seconds=60)
 async def message_send():
-    """Tasks loop for sending message. """
+    """Tasks loop for sending message."""
     global if_auto_message_sended
 
     if if_auto_message_sended is False:
