@@ -32,9 +32,12 @@ async def on_member_join(member):
     """Event happens when a new member join the server."""
     role = discord.utils.get(member.guild.roles, name="Role-Name")
     await member.add_roles(role)
-    welcome_msg = ("Hey, <@" + str(member.id) +
-                   "> welcome to **Server!**, pick your #roles and do write \
-        suggestion in #suggestion-box if you have any!")
+    welcome_msg = (
+        "Hey, <@"
+        + str(member.id)
+        + "> welcome to **Server!**, pick your #roles and do write \
+        suggestion in #suggestion-box if you have any!"
+    )
     channel = await client.fetch_channel(WELCOME_CHANNEL_ID)
     await channel.send(welcome_msg)
 
@@ -51,14 +54,13 @@ async def message_send():
 
     if if_auto_message_sended is False:
 
-        channel = await client.fetch_channel(MESSAGE_CHANNEL_ID
-                                             )  # find channel to send message
+        channel = await client.fetch_channel(
+            MESSAGE_CHANNEL_ID
+        )  # find channel to send message
 
         if os.stat("embed.json").st_size != 0:
-            embed = discord.Embed.from_dict(
-                json.load(open("./embed.json", "r+")))
-            await channel.send(content=open("./content.txt", "r+").read(),
-                               embed=embed)
+            embed = discord.Embed.from_dict(json.load(open("./embed.json", "r+")))
+            await channel.send(content=open("./content.txt", "r+").read(), embed=embed)
 
             # clear both message files
             open("./content.txt", "r+").truncate(0)
@@ -84,8 +86,7 @@ async def send(ctx):
 
     if os.stat("embed.json").st_size != 0:
         embed = discord.Embed.from_dict(json.load(open("./embed.json", "r+")))
-        await ctx.channel.send(content=open("./content.txt", "r+").read(),
-                               embed=embed)
+        await ctx.channel.send(content=open("./content.txt", "r+").read(), embed=embed)
 
         # clear both message files
         open("./content.txt", "r+").truncate(0)
@@ -110,8 +111,7 @@ async def clear(ctx, num=1):
 @client.command(name="meme")
 async def send_meme(ctx):
     """$meme command for sending memes.api github : https://github.com/D3vd/Meme_Api"""
-    response = requests.get(
-        "https://meme-api.herokuapp.com/gimme/ProgrammerHumor")
+    response = requests.get("https://meme-api.herokuapp.com/gimme/ProgrammerHumor")
     dict_res = response.json()
     await ctx.channel.send(dict_res["preview"][2])
 
@@ -146,9 +146,7 @@ async def on_guild_channel_create(channel):
             # new category created
             title_x = ":card_index_dividers: New category created: " + channel.name
 
-        embed_x = discord.Embed(title=title_x,
-                                timestamp=datetime.now(),
-                                color=0x95F985)
+        embed_x = discord.Embed(title=title_x, timestamp=datetime.now(), color=0x95F985)
         embed_x.set_footer(text=f"Channel ID: {channel.id}")
         await audit_ch.send(embed=embed_x)
 
@@ -161,16 +159,14 @@ async def on_guild_channel_delete(channel):
 
         title_x = f":wastebasket: {str(channel.type).capitalize()} channel deleted"
 
-        embed_x = discord.Embed(title=title_x,
-                                timestamp=datetime.now(),
-                                color=0xFF0000)
+        embed_x = discord.Embed(title=title_x, timestamp=datetime.now(), color=0xFF0000)
 
         embed_x.set_footer(text=f"Channel ID: {channel.id}")
 
         embed_x.add_field(name="Name", value=channel.name)
         if channel.type not in (
-                discord.ChannelType.voice,
-                discord.ChannelType.category,
+            discord.ChannelType.voice,
+            discord.ChannelType.category,
         ):
             embed_x.add_field(name="Topic", value=channel.topic)
 
@@ -184,22 +180,20 @@ async def on_guild_channel_update(channel_before, channel_after):
         any_update = False
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
-        title_x = f":tools: {str(channel_after.type).capitalize()} channel updated: {channel_before.name}"
+        title_x = f":tools: {str(channel_after.type).capitalize()} \
+                    channel updated: {channel_before.name}"
 
-        embed_x = discord.Embed(title=title_x,
-                                timestamp=datetime.now(),
-                                color=0xFFFF00)
+        embed_x = discord.Embed(title=title_x, timestamp=datetime.now(), color=0xFFFF00)
 
         if channel_before.name != channel_after.name:
-            embed_x.add_field(name="Renamed",
-                              value=channel_before.name + " -> " +
-                              channel_after.name)
+            embed_x.add_field(
+                name="Renamed", value=channel_before.name + " -> " + channel_after.name
+            )
             any_update = True
 
         if channel_before.topic != channel_after.topic:
             if channel_before.topic is None:
-                embed_x.add_field(name="Topic",
-                                  value="None -> " + channel_after.topic)
+                embed_x.add_field(name="Topic", value="None -> " + channel_after.topic)
             else:
                 embed_x.add_field(
                     name="Topic",
@@ -221,9 +215,7 @@ async def on_guild_role_create(role):
 
         title_x = ":screwdriver: Role created: " + role.name
 
-        embed_x = discord.Embed(title=title_x,
-                                timestamp=datetime.now(),
-                                color=0x95F985)
+        embed_x = discord.Embed(title=title_x, timestamp=datetime.now(), color=0x95F985)
         embed_x.set_footer(text=f"Role ID: {role.id}")
 
         await audit_ch.send(embed=embed_x)
@@ -236,15 +228,13 @@ async def on_guild_role_delete(role):
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
         title_x = ":wastebasket: Role deleted: " + role.name
-        embed_x = discord.Embed(title=title_x,
-                                timestamp=datetime.now(),
-                                color=0xFF0000)
+        embed_x = discord.Embed(title=title_x, timestamp=datetime.now(), color=0xFF0000)
 
         embed_x.add_field(name="Color", value=role.color)
-        embed_x.add_field(name="Hoisted",
-                          value="Yes" if role.hoist is True else "No")
-        embed_x.add_field(name="Mentionable",
-                          value="Yes" if role.mentionable is True else "No")
+        embed_x.add_field(name="Hoisted", value="Yes" if role.hoist is True else "No")
+        embed_x.add_field(
+            name="Mentionable", value="Yes" if role.mentionable is True else "No"
+        )
 
         embed_x.set_footer(text=f"Role ID: {role.id}")
 
@@ -259,17 +249,15 @@ async def on_guild_role_update(role_before, role_after):
 
         title_x = ":hammer_and_wrench: Role updated: " + role_before.name
 
-        embed_x = discord.Embed(title=title_x,
-                                timestamp=datetime.now(),
-                                color=0xFFFF00)
+        embed_x = discord.Embed(title=title_x, timestamp=datetime.now(), color=0xFFFF00)
 
         is_updated = False
 
         if role_before.name != role_after.name:
             is_updated = True
-            embed_x.add_field(name="Name",
-                              value=str(role_before.name) + " -> " +
-                              str(role_after.name))
+            embed_x.add_field(
+                name="Name", value=str(role_before.name) + " -> " + str(role_after.name)
+            )
 
         if role_before.color != role_after.color:
             is_updated = True
@@ -292,9 +280,7 @@ async def on_guild_update(guild_before, guild_after):
 
         title_x = ":hammer_and_wrench: Server information updated!"
 
-        embed_x = discord.Embed(title=title_x,
-                                timestamp=datetime.now(),
-                                color=0xFFFF00)
+        embed_x = discord.Embed(title=title_x, timestamp=datetime.now(), color=0xFFFF00)
 
         embed_x.set_thumbnail(url=guild_after.icon)
 
@@ -314,8 +300,9 @@ async def on_guild_update(guild_before, guild_after):
         if guild_before.description != guild_after.description:
             embed_x.add_field(
                 name="Description",
-                value=str(guild_before.description) + " -> " +
-                str(guild_after.description),
+                value=str(guild_before.description)
+                + " -> "
+                + str(guild_after.description),
             )
             major_upadate = True
 
