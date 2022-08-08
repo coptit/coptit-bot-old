@@ -18,14 +18,16 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 MESSAGE_CHANNEL_ID = os.getenv("MESSAGE_CHANNEL_ID")
 WELCOME_CHANNEL_ID = os.getenv("WELCOME_CHANNEL_ID")
 AUDIT_LOG_CHANNEL_ID = os.getenv("AUDIT_LOG_CHANNEL_ID")
-AUTO_MESSAGE_TO_SEND  = os.getenv("AUTO_MESSAGE_TO_SEND")
+AUTO_MESSAGE_TO_SEND = os.getenv("AUTO_MESSAGE_TO_SEND")
 AUDIT_MESSAGE_TO_SEND = os.getenv("AUDIT_MESSAGE_TO_SEND")
+
 
 @client.event
 async def on_ready():
     """Event happens when bot become live."""
     # await client.change_presence(activity=discord.Game(name="with code!"))
     print(f"Logged in as {client.user} (ID: {client.user.id})")
+
 
 @client.event
 async def on_member_join(member):
@@ -37,6 +39,7 @@ async def on_member_join(member):
         suggestion in #suggestion-box if you have any!")
     channel = await client.fetch_channel(WELCOME_CHANNEL_ID)
     await channel.send(welcome_msg)
+
 
 # this code is used when send embed message without command
 @tasks.loop(seconds=60)
@@ -61,11 +64,12 @@ async def message_send():
         elif os.stat("content.txt").st_size != 0:
             await channel.send(content=open("./content.txt", "r+").read())
             open("./content.txt", "r+").truncate(0)
-        
+
         AUTO_MESSAGE_TO_SEND = "false"
 
 
 message_send.start()
+
 
 @client.command(name="send")
 @commands.has_role("Coordinator")
@@ -106,6 +110,7 @@ async def send_meme(ctx):
         "https://meme-api.herokuapp.com/gimme/ProgrammerHumor")
     dict_res = response.json()
     await ctx.channel.send(dict_res["preview"][2])
+
 
 @client.event
 async def on_guild_channel_create(channel):
