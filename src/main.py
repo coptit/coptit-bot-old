@@ -147,7 +147,7 @@ async def on_guild_channel_create(channel):
         embed_x = discord.Embed(title=title_x,
                                 timestamp=datetime.now(),
                                 color=0x95F985)
-        embed_x.set_footer(text=f"Channel ID: {channel.id}")
+        embed_x.set_footer(text="Channel ID: {0}".format(channel.id))
         await audit_ch.send(embed=embed_x)
 
 @client.event
@@ -156,13 +156,14 @@ async def on_guild_channel_delete(channel):
     if audit_message_to_send:
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
-        title_x = f":wastebasket: {str(channel.type).capitalize()} channel deleted"
+        title_x = ":wastebasket: {0} channel deleted".format(
+            str(channel.type).capitalize())
 
         embed_x = discord.Embed(title=title_x,
                                 timestamp=datetime.now(),
                                 color=0xFF0000)
 
-        embed_x.set_footer(text=f"Channel ID: {channel.id}")
+        embed_x.set_footer(text="Channel ID: {0}".format(channel.id))
 
         embed_x.add_field(name="Name", value=channel.name)
         if channel.type not in (
@@ -181,8 +182,8 @@ async def on_guild_channel_update(channel_before, channel_after):
         any_update = False
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
-        title_x = f":tools: {str(channel_after.type).capitalize()} \
-        channel updated: {channel_before.name}"
+        title_x = ":tools: {0} channel updated: {1}".format(
+            str(channel_after.type).capitalize(), channel_before.name)
 
         embed_x = discord.Embed(title=title_x,
                                 timestamp=datetime.now(),
@@ -205,7 +206,7 @@ async def on_guild_channel_update(channel_before, channel_after):
                 )
             any_update = True
 
-        embed_x.set_footer(text=f"Channel ID: {channel_after.id}")
+        embed_x.set_footer(text="Channel ID: {0}".format(channel_after.id))
 
         if any_update:
             await audit_ch.send(embed=embed_x)
@@ -221,7 +222,7 @@ async def on_guild_role_create(role):
         embed_x = discord.Embed(title=title_x,
                                 timestamp=datetime.now(),
                                 color=0x95F985)
-        embed_x.set_footer(text=f"Role ID: {role.id}")
+        embed_x.set_footer(text="Role ID: {0}".format(role.id))
 
         await audit_ch.send(embed=embed_x)
 
@@ -243,7 +244,7 @@ async def on_guild_role_delete(role):
         embed_x.add_field(name="Mentionable",
                           value="Yes" if role.mentionable is True else "No")
 
-        embed_x.set_footer(text=f"Role ID: {role.id}")
+        embed_x.set_footer(text="Role ID: {0}".format(role.id))
 
         await audit_ch.send(embed=embed_x)
 
@@ -274,7 +275,7 @@ async def on_guild_role_update(role_before, role_after):
                 value=str(role_before.color) + " -> " + str(role_after.color),
             )
 
-        embed_x.set_footer(text=f"Role ID: {role_after.id}")
+        embed_x.set_footer(text="Role ID: {0}".format(role_after.id))
 
         if is_updated:
             await audit_ch.send(embed=embed_x)
