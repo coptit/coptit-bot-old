@@ -82,7 +82,6 @@ message_send.start()
 async def send(ctx):
     # if embed.json is not empty then send this message
     # embed message
-    embed_file = open("./embed.json", "r+")
 
     if os.stat("embed.json").st_size != 0:
         embed = discord.Embed.from_dict(json.load(open("./embed.json", "r+")))
