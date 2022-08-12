@@ -21,6 +21,7 @@ AUDIT_LOG_CHANNEL_ID = os.getenv("AUDIT_LOG_CHANNEL_ID")
 AUTO_MESSAGE_TO_SEND = os.getenv("AUTO_MESSAGE_TO_SEND")
 AUDIT_LOG_TO_SEND = os.getenv("AUDIT_LOG_TO_SEND")
 
+
 @client.event
 async def on_ready():
     """Event happens when bot become live."""
@@ -44,10 +45,10 @@ async def on_member_join(member):
 @tasks.loop(seconds=60)
 async def message_send():
     """Tasks loop for sending message."""
-    global AUTO_MESSAGE_TO_SEND 
-    
+    global AUTO_MESSAGE_TO_SEND
+
     if AUTO_MESSAGE_TO_SEND == "true":
-        
+
         channel = await client.fetch_channel(MESSAGE_CHANNEL_ID
                                              )  # find channel to send message
 
@@ -116,7 +117,7 @@ async def send_meme(ctx):
 async def on_guild_channel_create(channel):
     """Audit log send to channel when a new channel got created."""
     if AUDIT_LOG_TO_SEND:
-    
+
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
         if channel.type == discord.ChannelType.text:
@@ -154,7 +155,7 @@ async def on_guild_channel_create(channel):
 async def on_guild_channel_delete(channel):
     """Audit log send to channel when a channel got deleted"""
     if AUDIT_LOG_TO_SEND:
-        
+
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
         title_x = f":wastebasket: {str(channel.type).capitalize()} channel deleted"
@@ -179,7 +180,7 @@ async def on_guild_channel_delete(channel):
 async def on_guild_channel_update(channel_before, channel_after):
     """Audit log send to channel on channnel update."""
     if AUDIT_LOG_TO_SEND:
-        
+
         any_update = False
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
@@ -217,7 +218,7 @@ async def on_guild_channel_update(channel_before, channel_after):
 async def on_guild_role_create(role):
     """Audit log on new role created."""
     if AUDIT_LOG_TO_SEND:
-        
+
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
         title_x = ":screwdriver: Role created: " + role.name
@@ -234,7 +235,7 @@ async def on_guild_role_create(role):
 async def on_guild_role_delete(role):
     """Audit log on role delete"""
     if AUDIT_LOG_TO_SEND:
-        
+
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
         title_x = ":wastebasket: Role deleted: " + role.name
@@ -257,7 +258,7 @@ async def on_guild_role_delete(role):
 async def on_guild_role_update(role_before, role_after):
     """Audit log on role update."""
     if AUDIT_LOG_TO_SEND:
-        
+
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
         title_x = ":hammer_and_wrench: Role updated: " + role_before.name
@@ -291,7 +292,7 @@ async def on_guild_role_update(role_before, role_after):
 async def on_guild_update(guild_before, guild_after):
     """Audit log on server update."""
     if AUDIT_LOG_TO_SEND:
-        
+
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
         title_x = ":hammer_and_wrench: Server information updated!"
