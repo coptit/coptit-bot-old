@@ -295,7 +295,7 @@ async def on_guild_update(guild_before, guild_after):
 
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
-        title_x = ":hammer_and_wrench: Server information updated!"
+        title_x = ":hammer_and_wrench: Server's information updated!"
 
         embed_x = discord.Embed(title=title_x,
                                 timestamp=datetime.now(),
@@ -326,6 +326,31 @@ async def on_guild_update(guild_before, guild_after):
 
         if not major_upadate:
             embed_x.add_field(name="Other", value="Yes")
+
+        await audit_ch.send(embed=embed_x)
+
+
+@client.event
+async def on_guild_emojis_update(_, emojis_before, emojis_after):
+    """Audit log on Emojis Update"""
+    if AUDIT_LOG_TO_SEND:
+        audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
+
+        title_x = ":hammer_and_wrench: Server's Emojis updated!"
+
+        embed_x = discord.Embed(title=title_x,
+                                timestamp=datetime.now(),
+                                color=0xFFFF00)
+
+        for emoji in emojis_before:
+            if emoji not in emojis_after:
+                # this emoji has been removed
+                embed_x.add_field(name="Emoji Removed", value=emoji.name)
+
+        for emoji in emojis_after:
+            if emoji not in emojis_before:
+                # this emoji is new added
+                embed_x.add_field(name="Emoji Added", value=emoji)
 
         await audit_ch.send(embed=embed_x)
 
