@@ -398,5 +398,4 @@ async def ban(ctx, member: discord.Member, *, reason="Not specified"):
     if AUDIT_LOG_TO_SEND:
         await audit_ch.send(embed=embed_x)
 
-
 client.run(BOT_TOKEN)
