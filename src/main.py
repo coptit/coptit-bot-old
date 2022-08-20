@@ -355,4 +355,48 @@ async def on_guild_emojis_update(_, emojis_before, emojis_after):
         await audit_ch.send(embed=embed_x)
 
 
+@client.command(name="kick")
+@commands.has_role("Coordinator")
+async def kick(ctx, member: discord.Member, *, reason="Not specified"):
+    """Kick member"""
+    await member.kick(reason=reason)
+
+    audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
+
+    title_x = f":no_entry_sign:   {member} kicked form server!"
+
+    embed_x = discord.Embed(title=title_x,
+                            timestamp=datetime.now(),
+                            color=0xFF0000)
+
+    embed_x.add_field(name="Reason", value=reason)
+
+    await ctx.channel.send(embed=embed_x)
+
+    if AUDIT_LOG_TO_SEND:
+        await audit_ch.send(embed=embed_x)
+
+
+@client.command(name="ban")
+@commands.has_role("Admin")
+async def ban(ctx, member: discord.Member, *, reason="Not specified"):
+    """Ban member"""
+    await member.ban(reason=reason)
+
+    audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
+
+    title_x = f":no_entry:  {member} banned form server"
+
+    embed_x = discord.Embed(title=title_x,
+                            timestamp=datetime.now(),
+                            color=0xFF0000)
+
+    embed_x.add_field(name="Reason", value=reason)
+
+    await ctx.channel.send(embed=embed_x)
+
+    if AUDIT_LOG_TO_SEND:
+        await audit_ch.send(embed=embed_x)
+
+
 client.run(BOT_TOKEN)
