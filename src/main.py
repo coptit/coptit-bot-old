@@ -350,8 +350,9 @@ async def on_guild_emojis_update(_, emojis_before, emojis_after):
         for emoji in emojis_after:
             if emoji not in emojis_before:
                 # this emoji is new added
-                embed_x.add_field(name="Emoji Added",  value=emoji)
+                embed_x.add_field(name="Emoji Added", value=emoji)
 
         await audit_ch.send(embed=embed_x)
+
 
 client.run(BOT_TOKEN)
