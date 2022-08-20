@@ -331,9 +331,8 @@ async def on_guild_update(guild_before, guild_after):
 
 
 @client.event
-async def on_guild_emojis_update(guild, emojis_before, emojis_after):
+async def on_guild_emojis_update(_, emojis_before, emojis_after):
     """Audit log on Emojis Update"""
-
     if AUDIT_LOG_TO_SEND:
         audit_ch = client.get_channel(int(AUDIT_LOG_CHANNEL_ID))
 
