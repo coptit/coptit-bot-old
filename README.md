@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://user-images.githubusercontent.com/82411321/177823799-7c34a3ad-047e-4605-8b2e-5803bdd2561f.png"/>
 </p>
-<p align="center"><strong>Discord bot for collage programming club's discord server.</strong></p>
+<p align="center"><strong>Discord bot for college programming club's discord server.</strong></p>
 <p align="center">
   Built with Python & py-cord.
 </p>
